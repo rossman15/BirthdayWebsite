@@ -10,12 +10,39 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <nav class="navbar navbar-default" style="background-color: #00CC00;">
-        <p class="navbar-text" style="font-size: 36px; color: white;">You will be able to RSVP to Richard&#39;s party here soon!!!</p>
-
-    </nav>
-
+<body style="background-color: #DBD5C8">
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <p class="navbar-text" style="font-size: 36px; color: white;">Site under construction. Please do not RSVP yet. Thanks :)</p>
+                </div>
+            </div> 
+        </nav>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">RSVP</h3>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="name" class="form-control" id="name">
+                    </div>
+                    <div class="checkbox hidden">
+                        <label><input type="checkbox"> Friday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Saturday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Sunday</label>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
