@@ -1,0 +1,24 @@
+
+<div class="container">
+    <div class="img-rounded home-header">Richard's 50th Birthday Party</div>
+
+    <div class="center" style="width: 490px;">    
+        <div class="bg-primary img-rounded home-style">
+            <form class="form-inline" ng-submit="submit()">
+                <div class="form-group" style="margin: 10px;">
+                    <label style="margin-right: 4px;">Name:</label>
+                    <input  type="text" ng-keyup="findUsers()" ng-model="user" class="form-control" placeholder="Richard Vince Jr." style="width: 300px">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <div style="cursor: pointer;">
+                    <div style="padding-left: 5px;" ng-click="selectName(match)" ng-class="{highlight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-repeat="match in matches">
+                        {{match}}
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div ng-class="{hidden: showRSVP, bg-primary: !showRSVP}"> 
+            hello {{user}}!
+        </div>
+    </div>
+</div>
