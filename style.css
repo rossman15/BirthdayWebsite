@@ -4,9 +4,8 @@ body, h1, p {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 300;
-  margin: 0 0 20px 0;
 }
 
 
@@ -15,9 +14,9 @@ h1 {
    height: 300px;*/
    position: absolute;
    left: 50%;
-   top: 50%; 
+   top: 30%; 
    margin-left: -260px;
-   margin-top: -60px;
+   margin-top: 0px;
 }
 
 .home-style {
@@ -28,7 +27,10 @@ h1 {
 .home-header {
 	position: absolute;
 	left: 50%;
-	padding: 10px;
+	padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-bottom: 20px;
 	margin-left: -300px;
 	margin-top: 10px;
 	background-color: white; 
@@ -43,7 +45,12 @@ h1 {
 	background-color: blue;
 }
 
-
+.rsvp-style {
+  background-color: white;
+  color: black;
+  opacity: 0.85;
+  margin-top: -70px;
+}
 
 @media (min-width: 1200px) {
     .container{

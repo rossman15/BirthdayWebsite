@@ -2,12 +2,12 @@
 <div class="container">
     <div class="img-rounded home-header">Richard's 50th Birthday Party</div>
 
-    <div class="center" style="width: 490px;">    
-        <div class="bg-primary img-rounded home-style">
-            <form class="form-inline" ng-submit="submit()">
+    <div class="center" style="width: 485px;">    
+        <div ng-show="showName" ng-hide="!showName" class="bg-primary img-rounded home-style">
+            <form class="form-inline" ng-submit="submitName()" role="form">
                 <div class="form-group" style="margin: 10px;">
                     <label style="margin-right: 4px;">Name:</label>
-                    <input  type="text" ng-keyup="findUsers()" ng-model="user" class="form-control" placeholder="Richard Vince Jr." style="width: 300px">
+                    <input  type="text" ng-keyup="findUsers()" ng-model="user" class="form-control" placeholder="Richard Vince Jr." style="width: 300px" required>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
                 <div style="cursor: pointer;">
@@ -16,9 +16,42 @@
                     </div>
                 </div>
             </form>
+            <div ng-show="nameError" ng-hide="!nameError">
+                Please select a name from the list.
+            </div>
         </div>
-        <div ng-class="{hidden: showRSVP, bg-primary: !showRSVP}"> 
-            hello {{user}}!
+        <div ng-show="thankYou" ng-hide="!thankYou" class="bg-primary img-rounded home-style" style="padding: 20px;">
+            Thank You!
+        </div>
+        <div ng-show="showRSVP" ng-hide="!showRSVP" class="panel panel-primary rsvp-style">
+            <div class="panel-heading">RSVP for {{user}}</div>
+            <form class="panel-body" style="font-weight: 400; padding: 15px;" role="form" ng-submit="submitRSVP()">
+                <div class="form-group">
+                    <label>Partying:</label>
+                    <div class="checkbox" style="margin-top: 0px;" ng-show="showFriday" ng-hide="!showFriday">
+                        <label><input ng-model="friday" type="checkbox"> Friday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="saturday" type="checkbox" value=> Saturday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="sunday" type="checkbox"> Sunday</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Accomodations:</label>
+                    <div class="checkbox" style="margin-top: 0px;">
+                        <input type="text" ng-model="accomodations" class="form-control" placeholder="Best Western Hotel" required>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="showGuest" ng-hide="!showGuest">
+                    <label>Does this apply for {{pairs[user]}}?</label>
+                    <div class="checkbox" style="margin-top: 0px;">
+                        <label style="padding-right: 15px;"><input ng-model="yes" type="checkbox"> Yes</label><label><input ng-model="no" type="checkbox"> No</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">RSVP</button>
+            </form>
         </div>
     </div>
 </div>
