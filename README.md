@@ -1,2 +1,2 @@
-# BirthdayWebsite
-Uncle Richard's 50th birthday website
+# RSVP website
+Uncle Richard bought the Website Builder on godaddy.com to create the website for his 50th birthday party. He wanted his guests to RSVP on the website I would have had to upgrade the Website Builder to do this so instead I bought Web Hosting on godaddy.com for a couple months and created this form using AngularJS, Bootstrap, PHP, and MySQL. Home.html contains the form and main.js makes the ajax call to addRSVP.php which adds the RSVP to the database.
