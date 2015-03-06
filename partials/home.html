@@ -1,13 +1,15 @@
 
 <div class="container">
     <div class="img-rounded home-header">Richard's 50th Birthday Party</div>
-
     <div class="center" style="width: 485px;">    
-        <div ng-show="showName" ng-hide="!showName" class="bg-primary img-rounded home-style">
+
+        <!--      NAME FORM    -->
+        <div ng-show="NameForm.show" class="bg-primary img-rounded home-style">
             <form class="form-inline" ng-submit="submitName()" role="form">
+                <label style="padding: 10px;">Start typing your name and select from the drop-down list.</label>
                 <div class="form-group" style="margin: 10px;">
                     <label style="margin-right: 4px;">Name:</label>
-                    <input  type="text" ng-keyup="findUsers()" ng-model="user" class="form-control" placeholder="Richard Vince Jr." style="width: 300px" required>
+                    <input  type="text" ng-keyup="findUsers()" ng-model="user" class="form-control" placeholder="Richard Vince Jr." style="width: 320px" required>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
                 <div style="cursor: pointer;">
@@ -16,40 +18,82 @@
                     </div>
                 </div>
             </form>
-            <div ng-show="nameError" ng-hide="!nameError">
-                Please select a name from the list.
+            <div ng-show="NameForm.error" style="padding: 10px;">
+                Please select a name from the drop-down list. If your name is not there, please email rossmckay15@yahoo.com.
             </div>
         </div>
-        <div ng-show="thankYou" ng-hide="!thankYou" class="bg-primary img-rounded home-style" style="padding: 20px;">
-            Thank You!
+        <div ng-show="RSVPSubmission.success" class="bg-primary img-rounded home-style" style="padding: 20px; text-align: center;">
+            Your RSVP has been recorded, thank you!
         </div>
-        <div ng-show="showRSVP" ng-hide="!showRSVP" class="panel panel-primary rsvp-style">
+        <div ng-show="RSVPSubmission.error" class="bg-primary img-rounded home-style" style="padding: 20px; text-align: center;">
+            There was an error with your RSVP. Please email rossmckay15@yahoo.com.
+        </div>
+
+        <!--      RSVP FORM    -->
+        <div ng-show="RSVPForm.show" class="panel panel-primary rsvp-style">
             <div class="panel-heading">RSVP for {{user}}</div>
             <form class="panel-body" style="font-weight: 400; padding: 15px;" role="form" ng-submit="submitRSVP()">
                 <div class="form-group">
-                    <label>Partying:</label>
-                    <div class="checkbox" style="margin-top: 0px;" ng-show="showFriday" ng-hide="!showFriday">
-                        <label><input ng-model="friday" type="checkbox"> Friday</label>
+                    <label>Please select the days you will be attending:</label>
+                    <div class="checkbox" style="margin-top: 0px;" ng-show="RSVPForm.friday">
+                        <label><input ng-model="friday" ng-click="notAttending = false;" type="checkbox"> Friday</label>
                     </div>
                     <div class="checkbox">
-                        <label><input ng-model="saturday" type="checkbox" value=> Saturday</label>
+                        <label><input ng-model="saturday" ng-click="notAttending = false;" type="checkbox" value=> Saturday</label>
                     </div>
                     <div class="checkbox">
-                        <label><input ng-model="sunday" type="checkbox"> Sunday</label>
+                        <label><input ng-model="sunday" ng-click="notAttending = false;" type="checkbox"> Sunday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="notAttending" ng-click="sunday = false; saturday = false; friday = false;" type="checkbox"> Not attending at all</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Accomodations:</label>
+                    <label>Accomodations (if attending):</label>
                     <div class="checkbox" style="margin-top: 0px;">
-                        <input type="text" ng-model="accomodations" class="form-control" placeholder="Best Western Hotel" required>
+                        <input type="text" ng-model="accomodations" class="form-control" placeholder="Where are you staying?">
                     </div>
                 </div>
-                <div class="form-group" ng-show="showGuest" ng-hide="!showGuest">
-                    <label>Does this apply for {{pairs[user]}}?</label>
+                <div class="form-group">
+                    <label>Email:</label>
                     <div class="checkbox" style="margin-top: 0px;">
-                        <label style="padding-right: 15px;"><input ng-model="yes" type="checkbox"> Yes</label><label><input ng-model="no" type="checkbox"> No</label>
+                        <input type="email" ng-model="email" class="form-control" placeholder="Enter email">
                     </div>
                 </div>
+
+                <!--      For people with guests, partners, etc.    -->
+                <div class="form-group" ng-show="Guest.show">
+                    <label>Would you like to RSVP for {{pairs[user]}}?</label>
+                    <div class="checkbox" style="margin-top: 0px;">
+                        <label style="padding-right: 15px;"><input ng-click="RSVPForGuestYes()" ng-model="showGuestOptionYes" type="checkbox"> Yes</label><label><input ng-model="showGuestOptionNo" ng-click="RSVPForGuestNo()" type="checkbox"> No</label>
+                    </div>
+                </div>
+
+                <!--      RSVP for your guest    -->
+                <div class="form-group" ng-show="Guest.sameRSVP">
+                    <label>Is {{pairs[user]}} attending the same days as you?</label>
+                    <div class="checkbox" style="margin-top: 0px;">
+                        <label style="padding-right: 15px;"><input ng-model="guestSameDaysYes" ng-click="guestSameYes()" type="checkbox"> Yes</label><label><input ng-model="guestSameDaysNo" ng-click="guestSameNo()" type="checkbox"> No</label>
+                    </div>
+                </div>
+
+                <!--      Adding guest with different attendances    -->
+                <div class="form-group" ng-show="Guest.diffRSVP">
+                    <label>Please select the days {{pairs[user]}} will be attending:</label>
+                    <div class="checkbox" style="margin-top: 0px;" ng-show="RSVPForm.friday">
+                        <label><input ng-model="guestFriday" ng-click="guestNotAttending = false;" type="checkbox"> Friday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="guestSaturday" ng-click="guestNotAttending = false;" type="checkbox" value=> Saturday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="guestSunday" ng-click="guestNotAttending = false;" type="checkbox"> Sunday</label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input ng-model="guestNotAttending" ng-click="guestSunday = false; guestSaturday = false; guestFriday = false;" type="checkbox"> Not attending at all</label>
+                    </div>
+                </div>
+                
                 <button type="submit" class="btn btn-primary">RSVP</button>
             </form>
         </div>
